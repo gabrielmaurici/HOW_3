@@ -17,6 +17,8 @@ namespace CRUD
         {
             InitializeComponent();
         }
+
+        //Conexão banco dados
         private MySqlConnectionStringBuilder conexaoBanco()
         {
             MySqlConnectionStringBuilder conexaoBD = new MySqlConnectionStringBuilder();
@@ -27,6 +29,7 @@ namespace CRUD
             conexaoBD.SslMode = 0;
             return conexaoBD;
         }
+        // atualização do grid
         private void AtualizarGrid()
         {
             MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
@@ -63,6 +66,7 @@ namespace CRUD
                 Console.WriteLine(ex.Message);
             }
         }
+        // limpeza de campos
         private void LimparCampos()
         {
             tbId.Clear();
@@ -83,9 +87,10 @@ namespace CRUD
         {
             LimparCampos();
         }
-
+        // função salva insert
         private void buttonsSalvar_Click(object sender, EventArgs e)
         {
+            //conecta ao bd
             MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
             MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
             try
@@ -93,12 +98,13 @@ namespace CRUD
                 realizaConexacoBD.Open();
 
                 MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
-               
+               //comando sql insert
                 comandoMySql.CommandText = "INSERT INTO disciplina (Nome,NomeCompleto,NivelEnsino,CreditosAcademicos,CreditosFinanceiros,CargaHoraria,DuracaoAula) " +
                     "VALUES('" + tbNome.Text + "', '" + tbNomeCompleto.Text + "','" + cbNivelEnsino.Text + "'," + Convert.ToInt32(tbCreditosAcademicos.Text) + ", " + Convert.ToInt32(tbCreditosFinanceiros.Text) + ", " + Convert.ToInt32(tbCargaHoraria.Text) + ", " + Convert.ToInt32(tbDuracaoAula.Text) + ")";
                 comandoMySql.ExecuteNonQuery();
-
+                //encerra conexão com bd
                 realizaConexacoBD.Close();
+                //mensagem de insert
                 MessageBox.Show("Inserido com sucesso");
                 AtualizarGrid();
                 LimparCampos();
@@ -110,19 +116,23 @@ namespace CRUD
             }
         }
 
+        // função edita um insert
         private void buttonEditar_Click(object sender, EventArgs e)
         {
             MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
             MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
             try
             {
+                //conecta ao bd
                 realizaConexacoBD.Open();
 
                 MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
+                //comando sql update
                 comandoMySql.CommandText = "UPDATE disciplina SET nome= '" + tbNome.Text + "', " + "NomeCompleto = '" + tbNomeCompleto.Text + "', " + "NivelEnsino = '" + cbNivelEnsino.Text + "', " + "CreditosAcademicos = '" + tbCreditosAcademicos.Text + "', " + "CreditosFinanceiros = '" + tbCreditosFinanceiros.Text + "', " + "CargaHoraria = '" + tbCargaHoraria.Text + "', " + "DuracaoAula = '" + tbDuracaoAula.Text + "' " + " WHERE id = " + tbId.Text + "";
                 comandoMySql.ExecuteNonQuery();
-
+                //encerra conexão com bd
                 realizaConexacoBD.Close();
+                //mensagem de atualização
                 MessageBox.Show("Atualizado com sucesso");
                 AtualizarGrid();
                 LimparCampos();
@@ -133,6 +143,7 @@ namespace CRUD
             }
         }
 
+        //função deleta insert
         private void buttonDeletar_Click(object sender, EventArgs e)
 
         {
@@ -140,13 +151,16 @@ namespace CRUD
             MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
             try
             {
+                //conecta ao bd
                 realizaConexacoBD.Open();
 
                 MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
+                //comando sql delete
                 comandoMySql.CommandText = "DELETE FROM disciplina WHERE id = " + tbId.Text + "";
                 comandoMySql.ExecuteNonQuery();
-
+                //encerra conexão com bd
                 realizaConexacoBD.Close();
+                //mensagem de delete
                 MessageBox.Show("Deletado com sucesso!");
                 AtualizarGrid();
                 LimparCampos();
@@ -157,6 +171,8 @@ namespace CRUD
                 Console.WriteLine(ex.Message);
             }
         }
+
+        //função que popula o tb
             private void dgDisciplinas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             {
