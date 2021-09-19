@@ -30,258 +30,382 @@ namespace CRUD
         private void InitializeComponent()
         {
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.dgDisciplinas = new System.Windows.Forms.DataGridView();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNomeCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNivelEnsino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCreditosAcademicos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCreditosFinanceiros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCargaHoraria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDuracaoAula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonDeletar = new System.Windows.Forms.Button();
+            this.buttonLimpar = new System.Windows.Forms.Button();
+            this.buttonEditar = new System.Windows.Forms.Button();
+            this.labelId = new System.Windows.Forms.Label();
+            this.tbId = new System.Windows.Forms.TextBox();
+            this.buttonsSalvar = new System.Windows.Forms.Button();
+            this.cbNivelEnsino = new System.Windows.Forms.ComboBox();
+            this.labelDuracaoAula = new System.Windows.Forms.Label();
+            this.tbDuracaoAula = new System.Windows.Forms.TextBox();
+            this.labelCargaHoraria = new System.Windows.Forms.Label();
+            this.tbCargaHoraria = new System.Windows.Forms.TextBox();
+            this.labelCreditosFinanceiros = new System.Windows.Forms.Label();
+            this.tbCreditosFinanceiros = new System.Windows.Forms.TextBox();
+            this.labelCreditosAcademicos = new System.Windows.Forms.Label();
+            this.tbCreditosAcademicos = new System.Windows.Forms.TextBox();
+            this.labelNivelEnsino = new System.Windows.Forms.Label();
+            this.labelNomeCompleto = new System.Windows.Forms.Label();
+            this.tbNomeCompleto = new System.Windows.Forms.TextBox();
+            this.labelNome = new System.Windows.Forms.Label();
+            this.tbNome = new System.Windows.Forms.TextBox();
+            this.Titulo = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDisciplinas)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.dataGridView1);
-            this.panel3.Location = new System.Drawing.Point(70, 200);
+            this.panel3.Controls.Add(this.dgDisciplinas);
+            this.panel3.Location = new System.Drawing.Point(13, 190);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(661, 244);
+            this.panel3.Size = new System.Drawing.Size(870, 244);
             this.panel3.TabIndex = 21;
             // 
-            // dataGridView1
+            // dgDisciplinas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 17);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(631, 206);
-            this.dataGridView1.TabIndex = 0;
+            this.dgDisciplinas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgDisciplinas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
+            this.ColumnNome,
+            this.ColumnNomeCompleto,
+            this.ColumnNivelEnsino,
+            this.ColumnCreditosAcademicos,
+            this.ColumnCreditosFinanceiros,
+            this.ColumnCargaHoraria,
+            this.ColumnDuracaoAula});
+            this.dgDisciplinas.Location = new System.Drawing.Point(13, 17);
+            this.dgDisciplinas.Name = "dgDisciplinas";
+            this.dgDisciplinas.Size = new System.Drawing.Size(842, 206);
+            this.dgDisciplinas.TabIndex = 0;
+            this.dgDisciplinas.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgDisciplinas_CellMouseDoubleClick);
             // 
-            // label7
+            // ColumnId
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 11);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(237, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Cadastro de Disciplinas da IF \'Instituição Fictícia\'";
+            this.ColumnId.HeaderText = "Id";
+            this.ColumnId.Name = "ColumnId";
             // 
-            // panel2
+            // ColumnNome
             // 
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Location = new System.Drawing.Point(70, 6);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(662, 33);
-            this.panel2.TabIndex = 20;
+            this.ColumnNome.HeaderText = "Nome";
+            this.ColumnNome.Name = "ColumnNome";
+            // 
+            // ColumnNomeCompleto
+            // 
+            this.ColumnNomeCompleto.HeaderText = "Nome Completo";
+            this.ColumnNomeCompleto.Name = "ColumnNomeCompleto";
+            // 
+            // ColumnNivelEnsino
+            // 
+            this.ColumnNivelEnsino.HeaderText = "Niível Ensino";
+            this.ColumnNivelEnsino.Name = "ColumnNivelEnsino";
+            // 
+            // ColumnCreditosAcademicos
+            // 
+            this.ColumnCreditosAcademicos.HeaderText = "Créditos Acadêmicos";
+            this.ColumnCreditosAcademicos.Name = "ColumnCreditosAcademicos";
+            // 
+            // ColumnCreditosFinanceiros
+            // 
+            this.ColumnCreditosFinanceiros.HeaderText = "Créditos Financeiros";
+            this.ColumnCreditosFinanceiros.Name = "ColumnCreditosFinanceiros";
+            // 
+            // ColumnCargaHoraria
+            // 
+            this.ColumnCargaHoraria.HeaderText = "Carga Horária";
+            this.ColumnCargaHoraria.Name = "ColumnCargaHoraria";
+            // 
+            // ColumnDuracaoAula
+            // 
+            this.ColumnDuracaoAula.HeaderText = "Duração da Aula";
+            this.ColumnDuracaoAula.Name = "ColumnDuracaoAula";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.textBox9);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.textBox6);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Location = new System.Drawing.Point(69, 45);
+            this.panel1.Controls.Add(this.buttonDeletar);
+            this.panel1.Controls.Add(this.buttonLimpar);
+            this.panel1.Controls.Add(this.buttonEditar);
+            this.panel1.Controls.Add(this.labelId);
+            this.panel1.Controls.Add(this.tbId);
+            this.panel1.Controls.Add(this.buttonsSalvar);
+            this.panel1.Controls.Add(this.cbNivelEnsino);
+            this.panel1.Controls.Add(this.labelDuracaoAula);
+            this.panel1.Controls.Add(this.tbDuracaoAula);
+            this.panel1.Controls.Add(this.labelCargaHoraria);
+            this.panel1.Controls.Add(this.tbCargaHoraria);
+            this.panel1.Controls.Add(this.labelCreditosFinanceiros);
+            this.panel1.Controls.Add(this.tbCreditosFinanceiros);
+            this.panel1.Controls.Add(this.labelCreditosAcademicos);
+            this.panel1.Controls.Add(this.tbCreditosAcademicos);
+            this.panel1.Controls.Add(this.labelNivelEnsino);
+            this.panel1.Controls.Add(this.labelNomeCompleto);
+            this.panel1.Controls.Add(this.tbNomeCompleto);
+            this.panel1.Controls.Add(this.labelNome);
+            this.panel1.Controls.Add(this.tbNome);
+            this.panel1.Location = new System.Drawing.Point(12, 35);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(663, 149);
+            this.panel1.Size = new System.Drawing.Size(871, 149);
             this.panel1.TabIndex = 19;
             // 
-            // button1
+            // buttonDeletar
             // 
-            this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(281, 114);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "SALVAR";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonDeletar.BackColor = System.Drawing.Color.Red;
+            this.buttonDeletar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonDeletar.Location = new System.Drawing.Point(561, 114);
+            this.buttonDeletar.Name = "buttonDeletar";
+            this.buttonDeletar.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeletar.TabIndex = 20;
+            this.buttonDeletar.Text = "DELETAR";
+            this.buttonDeletar.UseVisualStyleBackColor = false;
+            this.buttonDeletar.Click += new System.EventHandler(this.buttonDeletar_Click);
             // 
-            // comboBox1
+            // buttonLimpar
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.buttonLimpar.BackColor = System.Drawing.Color.Gray;
+            this.buttonLimpar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonLimpar.Location = new System.Drawing.Point(468, 114);
+            this.buttonLimpar.Name = "buttonLimpar";
+            this.buttonLimpar.Size = new System.Drawing.Size(75, 23);
+            this.buttonLimpar.TabIndex = 19;
+            this.buttonLimpar.Text = "LIMPAR";
+            this.buttonLimpar.UseVisualStyleBackColor = false;
+            this.buttonLimpar.Click += new System.EventHandler(this.buttonLimpar_Click);
+            // 
+            // buttonEditar
+            // 
+            this.buttonEditar.BackColor = System.Drawing.Color.OrangeRed;
+            this.buttonEditar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonEditar.Location = new System.Drawing.Point(375, 114);
+            this.buttonEditar.Name = "buttonEditar";
+            this.buttonEditar.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditar.TabIndex = 18;
+            this.buttonEditar.Text = "EDITAR";
+            this.buttonEditar.UseVisualStyleBackColor = false;
+            this.buttonEditar.Click += new System.EventHandler(this.buttonEditar_Click);
+            // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Location = new System.Drawing.Point(94, 20);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(18, 13);
+            this.labelId.TabIndex = 17;
+            this.labelId.Text = "ID";
+            // 
+            // tbId
+            // 
+            this.tbId.Enabled = false;
+            this.tbId.Location = new System.Drawing.Point(118, 17);
+            this.tbId.Name = "tbId";
+            this.tbId.Size = new System.Drawing.Size(100, 20);
+            this.tbId.TabIndex = 16;
+            // 
+            // buttonsSalvar
+            // 
+            this.buttonsSalvar.BackColor = System.Drawing.Color.Green;
+            this.buttonsSalvar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonsSalvar.Location = new System.Drawing.Point(281, 114);
+            this.buttonsSalvar.Name = "buttonsSalvar";
+            this.buttonsSalvar.Size = new System.Drawing.Size(75, 23);
+            this.buttonsSalvar.TabIndex = 15;
+            this.buttonsSalvar.Text = "SALVAR";
+            this.buttonsSalvar.UseVisualStyleBackColor = false;
+            this.buttonsSalvar.Click += new System.EventHandler(this.buttonsSalvar_Click);
+            // 
+            // cbNivelEnsino
+            // 
+            this.cbNivelEnsino.FormattingEnabled = true;
+            this.cbNivelEnsino.Items.AddRange(new object[] {
             "Doutorado",
             "Ens Médio",
             "Graduação",
             "Mestrado",
             "Técnólogo"});
-            this.comboBox1.Location = new System.Drawing.Point(96, 63);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 14;
+            this.cbNivelEnsino.Location = new System.Drawing.Point(732, 16);
+            this.cbNivelEnsino.Name = "cbNivelEnsino";
+            this.cbNivelEnsino.Size = new System.Drawing.Size(100, 21);
+            this.cbNivelEnsino.TabIndex = 14;
             // 
-            // label9
+            // labelDuracaoAula
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(452, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 13);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "Duração da Aula";
+            this.labelDuracaoAula.AutoSize = true;
+            this.labelDuracaoAula.Location = new System.Drawing.Point(643, 67);
+            this.labelDuracaoAula.Name = "labelDuracaoAula";
+            this.labelDuracaoAula.Size = new System.Drawing.Size(87, 13);
+            this.labelDuracaoAula.TabIndex = 13;
+            this.labelDuracaoAula.Text = "Duração da Aula";
             // 
-            // textBox9
+            // tbDuracaoAula
             // 
-            this.textBox9.Location = new System.Drawing.Point(545, 11);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 12;
+            this.tbDuracaoAula.Location = new System.Drawing.Point(732, 63);
+            this.tbDuracaoAula.Name = "tbDuracaoAula";
+            this.tbDuracaoAula.Size = new System.Drawing.Size(100, 20);
+            this.tbDuracaoAula.TabIndex = 12;
             // 
-            // label4
+            // labelCargaHoraria
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(253, 66);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Carga Horária";
+            this.labelCargaHoraria.AutoSize = true;
+            this.labelCargaHoraria.Location = new System.Drawing.Point(453, 63);
+            this.labelCargaHoraria.Name = "labelCargaHoraria";
+            this.labelCargaHoraria.Size = new System.Drawing.Size(72, 13);
+            this.labelCargaHoraria.TabIndex = 11;
+            this.labelCargaHoraria.Text = "Carga Horária";
             // 
-            // textBox4
+            // tbCargaHoraria
             // 
-            this.textBox4.Location = new System.Drawing.Point(331, 63);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 10;
+            this.tbCargaHoraria.Location = new System.Drawing.Point(527, 60);
+            this.tbCargaHoraria.Name = "tbCargaHoraria";
+            this.tbCargaHoraria.Size = new System.Drawing.Size(100, 20);
+            this.tbCargaHoraria.TabIndex = 10;
             // 
-            // label5
+            // labelCreditosFinanceiros
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(223, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Créditos Financeiros";
+            this.labelCreditosFinanceiros.AutoSize = true;
+            this.labelCreditosFinanceiros.Location = new System.Drawing.Point(228, 63);
+            this.labelCreditosFinanceiros.Name = "labelCreditosFinanceiros";
+            this.labelCreditosFinanceiros.Size = new System.Drawing.Size(102, 13);
+            this.labelCreditosFinanceiros.TabIndex = 9;
+            this.labelCreditosFinanceiros.Text = "Créditos Financeiros";
             // 
-            // textBox5
+            // tbCreditosFinanceiros
             // 
-            this.textBox5.Location = new System.Drawing.Point(331, 37);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 8;
+            this.tbCreditosFinanceiros.Location = new System.Drawing.Point(332, 60);
+            this.tbCreditosFinanceiros.Name = "tbCreditosFinanceiros";
+            this.tbCreditosFinanceiros.Size = new System.Drawing.Size(100, 20);
+            this.tbCreditosFinanceiros.TabIndex = 8;
             // 
-            // label6
+            // labelCreditosAcademicos
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(219, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Créditos Acadêmicos";
+            this.labelCreditosAcademicos.AutoSize = true;
+            this.labelCreditosAcademicos.Location = new System.Drawing.Point(6, 63);
+            this.labelCreditosAcademicos.Name = "labelCreditosAcademicos";
+            this.labelCreditosAcademicos.Size = new System.Drawing.Size(106, 13);
+            this.labelCreditosAcademicos.TabIndex = 7;
+            this.labelCreditosAcademicos.Text = "Créditos Acadêmicos";
             // 
-            // textBox6
+            // tbCreditosAcademicos
             // 
-            this.textBox6.Location = new System.Drawing.Point(331, 11);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 6;
+            this.tbCreditosAcademicos.Location = new System.Drawing.Point(118, 60);
+            this.tbCreditosAcademicos.Name = "tbCreditosAcademicos";
+            this.tbCreditosAcademicos.Size = new System.Drawing.Size(100, 20);
+            this.tbCreditosAcademicos.TabIndex = 6;
             // 
-            // label3
+            // labelNivelEnsino
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 66);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Nível de Ensino";
+            this.labelNivelEnsino.AutoSize = true;
+            this.labelNivelEnsino.Location = new System.Drawing.Point(647, 19);
+            this.labelNivelEnsino.Name = "labelNivelEnsino";
+            this.labelNivelEnsino.Size = new System.Drawing.Size(83, 13);
+            this.labelNivelEnsino.TabIndex = 5;
+            this.labelNivelEnsino.Text = "Nível de Ensino";
             // 
-            // label2
+            // labelNomeCompleto
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Nome Completo";
+            this.labelNomeCompleto.AutoSize = true;
+            this.labelNomeCompleto.Location = new System.Drawing.Point(443, 20);
+            this.labelNomeCompleto.Name = "labelNomeCompleto";
+            this.labelNomeCompleto.Size = new System.Drawing.Size(82, 13);
+            this.labelNomeCompleto.TabIndex = 3;
+            this.labelNomeCompleto.Text = "Nome Completo";
             // 
-            // textBox2
+            // tbNomeCompleto
             // 
-            this.textBox2.Location = new System.Drawing.Point(96, 37);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 2;
+            this.tbNomeCompleto.Location = new System.Drawing.Point(527, 17);
+            this.tbNomeCompleto.Name = "tbNomeCompleto";
+            this.tbNomeCompleto.Size = new System.Drawing.Size(100, 20);
+            this.tbNomeCompleto.TabIndex = 2;
             // 
-            // label1
+            // labelNome
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Nome";
+            this.labelNome.AutoSize = true;
+            this.labelNome.Location = new System.Drawing.Point(295, 19);
+            this.labelNome.Name = "labelNome";
+            this.labelNome.Size = new System.Drawing.Size(35, 13);
+            this.labelNome.TabIndex = 1;
+            this.labelNome.Text = "Nome";
             // 
-            // textBox1
+            // tbNome
             // 
-            this.textBox1.Location = new System.Drawing.Point(96, 11);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.tbNome.Location = new System.Drawing.Point(332, 16);
+            this.tbNome.Name = "tbNome";
+            this.tbNome.Size = new System.Drawing.Size(100, 20);
+            this.tbNome.TabIndex = 0;
+            // 
+            // Titulo
+            // 
+            this.Titulo.AutoSize = true;
+            this.Titulo.Location = new System.Drawing.Point(273, 9);
+            this.Titulo.Name = "Titulo";
+            this.Titulo.Size = new System.Drawing.Size(304, 13);
+            this.Titulo.TabIndex = 0;
+            this.Titulo.Text = "CADASTRO DE DISCIPLINAS DE IF \'INSTITUIÇÃO FICTÍCIA\'";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(899, 450);
+            this.Controls.Add(this.Titulo);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Cadastro de Disciplinas";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDisciplinas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView dgDisciplinas;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonsSalvar;
+        private System.Windows.Forms.ComboBox cbNivelEnsino;
+        private System.Windows.Forms.Label labelDuracaoAula;
+        private System.Windows.Forms.TextBox tbDuracaoAula;
+        private System.Windows.Forms.Label labelCargaHoraria;
+        private System.Windows.Forms.TextBox tbCargaHoraria;
+        private System.Windows.Forms.Label labelCreditosFinanceiros;
+        private System.Windows.Forms.TextBox tbCreditosFinanceiros;
+        private System.Windows.Forms.Label labelCreditosAcademicos;
+        private System.Windows.Forms.TextBox tbCreditosAcademicos;
+        private System.Windows.Forms.Label labelNivelEnsino;
+        private System.Windows.Forms.Label labelNomeCompleto;
+        private System.Windows.Forms.TextBox tbNomeCompleto;
+        private System.Windows.Forms.Label labelNome;
+        private System.Windows.Forms.TextBox tbNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNomeCompleto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNivelEnsino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCreditosAcademicos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCreditosFinanceiros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCargaHoraria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDuracaoAula;
+        private System.Windows.Forms.Button buttonDeletar;
+        private System.Windows.Forms.Button buttonLimpar;
+        private System.Windows.Forms.Button buttonEditar;
+        private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.TextBox tbId;
+        private System.Windows.Forms.Label Titulo;
     }
 }
 
