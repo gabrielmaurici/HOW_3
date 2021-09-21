@@ -362,7 +362,7 @@ namespace CRUD
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Cadastro de Disciplinas";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            //this.Load += new System.EventHandler(this.Form1_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgDisciplinas)).EndInit();
             this.panel1.ResumeLayout(false);
