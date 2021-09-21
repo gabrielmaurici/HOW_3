@@ -7,63 +7,131 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Data;
+using Data.Repository;
 using MySql.Data.MySqlClient;
 
 namespace CRUD
 {
     public partial class Form1 : Form
     {
+        DisciplinaRepository repositorio = new DisciplinaRepository();
+
         public Form1()
         {
             InitializeComponent();
+            AtualizarGrid();
         }
 
-        //Conexão banco dados
-        private MySqlConnectionStringBuilder conexaoBanco()
-        {
-            MySqlConnectionStringBuilder conexaoBD = new MySqlConnectionStringBuilder();
-            conexaoBD.Server = "localhost";
-            conexaoBD.Database = "cadastrodisciplinas";
-            conexaoBD.UserID = "root";
-            conexaoBD.Password = "";
-            conexaoBD.SslMode = 0;
-            return conexaoBD;
-        }
         // atualização do grid
         private void AtualizarGrid()
         {
-            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
-            MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
             try
             {
-                realizaConexacoBD.Open();
+                List<Disciplina> listaDisciplinas = new List<Disciplina>();
 
-                MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
-                comandoMySql.CommandText = "SELECT * FROM disciplina";
-                MySqlDataReader reader = comandoMySql.ExecuteReader();
-
+                //Limpa o DataGrid para receber os dados do Db novamente
                 dgDisciplinas.Rows.Clear();
+                // Chama o método da classe DisciplinaRepository que traz todas as Disciplinas do DataGrid e armazena na lista Disciplinas
+                listaDisciplinas = repositorio.ListarGrid();
 
-                while (reader.Read())
+                foreach (Disciplina disciplina in listaDisciplinas)
                 {
                     DataGridViewRow row = (DataGridViewRow)dgDisciplinas.Rows[0].Clone();
-                    row.Cells[0].Value = reader.GetInt32(0);
-                    row.Cells[1].Value = reader.GetString(1);
-                    row.Cells[2].Value = reader.GetString(2);
-                    row.Cells[3].Value = reader.GetString(3);
-                    row.Cells[4].Value = reader.GetInt32(4);
-                    row.Cells[5].Value = reader.GetInt32(5);
-                    row.Cells[6].Value = reader.GetInt32(6);
-                    row.Cells[7].Value = reader.GetInt32(7);
+                    row.Cells[0].Value = disciplina.Id;
+                    row.Cells[1].Value = disciplina.Nome;
+                    row.Cells[2].Value = disciplina.NomeCompleto;
+                    row.Cells[3].Value = disciplina.NivelEnsino;
+                    row.Cells[4].Value = disciplina.CreditosAcademicos;
+                    row.Cells[5].Value = disciplina.CreditosFinanceiros;
+                    row.Cells[6].Value = disciplina.CargaHoraria;
+                    row.Cells[7].Value = disciplina.DuracaoAula;
                     dgDisciplinas.Rows.Add(row);
                 }
-
-                realizaConexacoBD.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Can not open connection ! ");
-                Console.WriteLine(ex.Message);
+                MessageBox.Show("Não conseguimos efetuar a conexão com o Banco de Dados... Por favor tente mais tarde!");
+            }
+        }
+
+        // função salva insert
+        private void buttonsSalvar_Click(object sender, EventArgs e)
+        {
+            Disciplina disciplina = new Disciplina();
+
+            disciplina.Id = 0;
+            disciplina.Nome = tbNome.Text;
+            disciplina.NomeCompleto = tbNomeCompleto.Text;
+            disciplina.NivelEnsino = cbNivelEnsino.Text;
+            disciplina.CreditosAcademicos = Convert.ToInt32(tbCreditosAcademicos.Text);
+            disciplina.CreditosFinanceiros = Convert.ToInt32(tbCreditosFinanceiros.Text);
+            disciplina.CargaHoraria = Convert.ToInt32(tbCargaHoraria.Text);
+            disciplina.DuracaoAula = Convert.ToInt32(tbDuracaoAula.Text);
+
+            try
+            {
+                // Chama o método InserirDiscíplinas da Classe DisciplinaRepository que insere a disciplina no banco de dados
+                repositorio.InserirDisciplina(disciplina);
+
+                //mensagem de insert
+                MessageBox.Show("Inserido com sucesso");
+                AtualizarGrid();
+                LimparCampos();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Não conseguimos efetuar a conexão com o Banco de Dados... Por favor tente mais tarde!");
+            }
+        }
+        // função edita um insert
+        private void buttonEditar_Click(object sender, EventArgs e)
+        {
+            Disciplina disciplina = new Disciplina();
+
+            disciplina.Id = Convert.ToInt32(tbId.Text);
+            disciplina.Nome = tbNome.Text;
+            disciplina.NomeCompleto = tbNomeCompleto.Text;
+            disciplina.NivelEnsino = cbNivelEnsino.Text;
+            disciplina.CreditosAcademicos = Convert.ToInt32(tbCreditosAcademicos.Text);
+            disciplina.CreditosFinanceiros = Convert.ToInt32(tbCreditosFinanceiros.Text);
+            disciplina.CargaHoraria = Convert.ToInt32(tbCargaHoraria.Text);
+            disciplina.DuracaoAula = Convert.ToInt32(tbDuracaoAula.Text);
+
+            try
+            {
+                // Chama método de Editar Disciplina na classe DisciplinaRepository
+                repositorio.Editar(disciplina);
+
+                //mensagem de atualização
+                MessageBox.Show("Atualizado com sucesso");
+                AtualizarGrid();
+                LimparCampos();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Não foi possível se conectar com o Banco de Dados... Por favor tente editar sua disciplina mais tarde!");
+            }
+        }
+
+        //função deleta insert
+        private void buttonDeletar_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(tbId.Text);
+            
+            try
+            {
+                //Chama método Deletar para deletar disciplina na classe DisciplinaRepository
+                repositorio.Deletar(id);
+
+                //mensagem de delete
+                MessageBox.Show("Deletado com sucesso!");
+                AtualizarGrid();
+                LimparCampos();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Não foi possível se conectar com o Banco de Dados... Por favor tente deletar sua disciplina mais tarde!");
             }
         }
         // limpeza de campos
@@ -77,116 +145,23 @@ namespace CRUD
             tbCargaHoraria.Clear();
             tbDuracaoAula.Clear();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            AtualizarGrid();
-        }
-
         private void buttonLimpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
         }
-        // função salva insert
-        private void buttonsSalvar_Click(object sender, EventArgs e)
-        {
-            //conecta ao bd
-            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
-            MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
-            try
-            {
-                realizaConexacoBD.Open();
-
-                MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
-               //comando sql insert
-                comandoMySql.CommandText = "INSERT INTO disciplina (Nome,NomeCompleto,NivelEnsino,CreditosAcademicos,CreditosFinanceiros,CargaHoraria,DuracaoAula) " +
-                    "VALUES('" + tbNome.Text + "', '" + tbNomeCompleto.Text + "','" + cbNivelEnsino.Text + "'," + Convert.ToInt32(tbCreditosAcademicos.Text) + ", " + Convert.ToInt32(tbCreditosFinanceiros.Text) + ", " + Convert.ToInt32(tbCargaHoraria.Text) + ", " + Convert.ToInt32(tbDuracaoAula.Text) + ")";
-                comandoMySql.ExecuteNonQuery();
-                //encerra conexão com bd
-                realizaConexacoBD.Close();
-                //mensagem de insert
-                MessageBox.Show("Inserido com sucesso");
-                AtualizarGrid();
-                LimparCampos();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        // função edita um insert
-        private void buttonEditar_Click(object sender, EventArgs e)
-        {
-            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
-            MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
-            try
-            {
-                //conecta ao bd
-                realizaConexacoBD.Open();
-
-                MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
-                //comando sql update
-                comandoMySql.CommandText = "UPDATE disciplina SET nome= '" + tbNome.Text + "', " + "NomeCompleto = '" + tbNomeCompleto.Text + "', " + "NivelEnsino = '" + cbNivelEnsino.Text + "', " + "CreditosAcademicos = '" + tbCreditosAcademicos.Text + "', " + "CreditosFinanceiros = '" + tbCreditosFinanceiros.Text + "', " + "CargaHoraria = '" + tbCargaHoraria.Text + "', " + "DuracaoAula = '" + tbDuracaoAula.Text + "' " + " WHERE id = " + tbId.Text + "";
-                comandoMySql.ExecuteNonQuery();
-                //encerra conexão com bd
-                realizaConexacoBD.Close();
-                //mensagem de atualização
-                MessageBox.Show("Atualizado com sucesso");
-                AtualizarGrid();
-                LimparCampos();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        //função deleta insert
-        private void buttonDeletar_Click(object sender, EventArgs e)
-
-        {
-            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
-            MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
-            try
-            {
-                //conecta ao bd
-                realizaConexacoBD.Open();
-
-                MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
-                //comando sql delete
-                comandoMySql.CommandText = "DELETE FROM disciplina WHERE id = " + tbId.Text + "";
-                comandoMySql.ExecuteNonQuery();
-                //encerra conexão com bd
-                realizaConexacoBD.Close();
-                //mensagem de delete
-                MessageBox.Show("Deletado com sucesso!");
-                AtualizarGrid();
-                LimparCampos();
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         //função que popula o tb
-            private void dgDisciplinas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dgDisciplinas_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            {
-                dgDisciplinas.CurrentRow.Selected = true;
-                //preenche os textbox com as células da linha selecionada
-                tbNome.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnNome"].FormattedValue.ToString();
-                tbNomeCompleto.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnNomeCompleto"].FormattedValue.ToString();
-                cbNivelEnsino.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnNivelEnsino"].FormattedValue.ToString();
-                tbCreditosAcademicos.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnCreditosAcademicos"].FormattedValue.ToString();
-                tbCreditosFinanceiros.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnCreditosFinanceiros"].FormattedValue.ToString();
-                tbCargaHoraria.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnCargaHoraria"].FormattedValue.ToString();
-                tbDuracaoAula.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnDuracaoAula"].FormattedValue.ToString();
-                tbId.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnID"].FormattedValue.ToString();
-            }
+            dgDisciplinas.CurrentRow.Selected = true;
+            //preenche os textbox com as células da linha selecionada
+            tbNome.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnNome"].FormattedValue.ToString();
+            tbNomeCompleto.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnNomeCompleto"].FormattedValue.ToString();
+            cbNivelEnsino.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnNivelEnsino"].FormattedValue.ToString();
+            tbCreditosAcademicos.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnCreditosAcademicos"].FormattedValue.ToString();
+            tbCreditosFinanceiros.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnCreditosFinanceiros"].FormattedValue.ToString();
+            tbCargaHoraria.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnCargaHoraria"].FormattedValue.ToString();
+            tbDuracaoAula.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnDuracaoAula"].FormattedValue.ToString();
+            tbId.Text = dgDisciplinas.Rows[e.RowIndex].Cells["ColumnID"].FormattedValue.ToString();
         }
     }
 }
