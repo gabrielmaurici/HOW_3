@@ -16,13 +16,11 @@ namespace CRUD
     public partial class Form1 : Form
     {
         DisciplinaRepository repositorio = new DisciplinaRepository();
-
         public Form1()
         {
             InitializeComponent();
             AtualizarGrid();
         }
-
         // atualização do grid
         private void AtualizarGrid()
         {
@@ -30,11 +28,11 @@ namespace CRUD
             {
                 List<Disciplina> listaDisciplinas = new List<Disciplina>();
 
-                //Limpa o DataGrid para receber os dados do Db novamente
-                dgDisciplinas.Rows.Clear();
                 // Chama o método da classe DisciplinaRepository que traz todas as Disciplinas do DataGrid e armazena na lista Disciplinas
                 listaDisciplinas = repositorio.ListarGrid();
 
+                //Limpa o DataGrid para receber os dados do Db novamente
+                dgDisciplinas.Rows.Clear();
                 foreach (Disciplina disciplina in listaDisciplinas)
                 {
                     DataGridViewRow row = (DataGridViewRow)dgDisciplinas.Rows[0].Clone();
@@ -49,28 +47,27 @@ namespace CRUD
                     dgDisciplinas.Rows.Add(row);
                 }
             }
-            catch (Exception)
+            catch
             {
                 MessageBox.Show("Não conseguimos efetuar a conexão com o Banco de Dados... Por favor tente mais tarde!");
             }
         }
-
         // função salva insert
         private void buttonsSalvar_Click(object sender, EventArgs e)
         {
-            Disciplina disciplina = new Disciplina();
-
-            disciplina.Id = 0;
-            disciplina.Nome = tbNome.Text;
-            disciplina.NomeCompleto = tbNomeCompleto.Text;
-            disciplina.NivelEnsino = cbNivelEnsino.Text;
-            disciplina.CreditosAcademicos = Convert.ToInt32(tbCreditosAcademicos.Text);
-            disciplina.CreditosFinanceiros = Convert.ToInt32(tbCreditosFinanceiros.Text);
-            disciplina.CargaHoraria = Convert.ToInt32(tbCargaHoraria.Text);
-            disciplina.DuracaoAula = Convert.ToInt32(tbDuracaoAula.Text);
-
             try
             {
+                Disciplina disciplina = new Disciplina();
+
+                disciplina.Id = 0;
+                disciplina.Nome = tbNome.Text;
+                disciplina.NomeCompleto = tbNomeCompleto.Text;
+                disciplina.NivelEnsino = cbNivelEnsino.Text;
+                disciplina.CreditosAcademicos = Convert.ToInt32(tbCreditosAcademicos.Text);
+                disciplina.CreditosFinanceiros = Convert.ToInt32(tbCreditosFinanceiros.Text);
+                disciplina.CargaHoraria = Convert.ToInt32(tbCargaHoraria.Text);
+                disciplina.DuracaoAula = Convert.ToInt32(tbDuracaoAula.Text);
+
                 // Chama o método InserirDiscíplinas da Classe DisciplinaRepository que insere a disciplina no banco de dados
                 repositorio.InserirDisciplina(disciplina);
 
@@ -79,7 +76,7 @@ namespace CRUD
                 AtualizarGrid();
                 LimparCampos();
             }
-            catch (Exception)
+            catch
             {
                 Console.WriteLine("Não conseguimos efetuar a conexão com o Banco de Dados... Por favor tente mais tarde!");
             }
@@ -87,19 +84,19 @@ namespace CRUD
         // função edita um insert
         private void buttonEditar_Click(object sender, EventArgs e)
         {
-            Disciplina disciplina = new Disciplina();
-
-            disciplina.Id = Convert.ToInt32(tbId.Text);
-            disciplina.Nome = tbNome.Text;
-            disciplina.NomeCompleto = tbNomeCompleto.Text;
-            disciplina.NivelEnsino = cbNivelEnsino.Text;
-            disciplina.CreditosAcademicos = Convert.ToInt32(tbCreditosAcademicos.Text);
-            disciplina.CreditosFinanceiros = Convert.ToInt32(tbCreditosFinanceiros.Text);
-            disciplina.CargaHoraria = Convert.ToInt32(tbCargaHoraria.Text);
-            disciplina.DuracaoAula = Convert.ToInt32(tbDuracaoAula.Text);
-
             try
             {
+                Disciplina disciplina = new Disciplina();
+
+                disciplina.Id = Convert.ToInt32(tbId.Text);
+                disciplina.Nome = tbNome.Text;
+                disciplina.NomeCompleto = tbNomeCompleto.Text;
+                disciplina.NivelEnsino = cbNivelEnsino.Text;
+                disciplina.CreditosAcademicos = Convert.ToInt32(tbCreditosAcademicos.Text);
+                disciplina.CreditosFinanceiros = Convert.ToInt32(tbCreditosFinanceiros.Text);
+                disciplina.CargaHoraria = Convert.ToInt32(tbCargaHoraria.Text);
+                disciplina.DuracaoAula = Convert.ToInt32(tbDuracaoAula.Text);
+
                 // Chama método de Editar Disciplina na classe DisciplinaRepository
                 repositorio.Editar(disciplina);
 
@@ -108,19 +105,17 @@ namespace CRUD
                 AtualizarGrid();
                 LimparCampos();
             }
-            catch (Exception)
+            catch
             {
-                Console.WriteLine("Não foi possível se conectar com o Banco de Dados... Por favor tente editar sua disciplina mais tarde!");
+                MessageBox.Show("Não foi possível se conectar com o Banco de Dados... Por favor tente editar sua disciplina mais tarde!");
             }
         }
-
         //função deleta insert
         private void buttonDeletar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tbId.Text);
-            
             try
             {
+                int id = Convert.ToInt32(tbId.Text);
                 //Chama método Deletar para deletar disciplina na classe DisciplinaRepository
                 repositorio.Deletar(id);
 
@@ -129,7 +124,7 @@ namespace CRUD
                 AtualizarGrid();
                 LimparCampos();
             }
-            catch (Exception)
+            catch
             {
                 Console.WriteLine("Não foi possível se conectar com o Banco de Dados... Por favor tente deletar sua disciplina mais tarde!");
             }

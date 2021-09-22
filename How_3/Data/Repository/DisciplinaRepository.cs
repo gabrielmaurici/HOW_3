@@ -23,8 +23,8 @@ namespace Data.Repository
 
             MySqlCommand comandoMySql = realizaConexacoDb.CreateCommand();
             //comando sql insert
-            comandoMySql.CommandText = "INSERT INTO disciplina (Nome, NomeCompleto, NivelEnsino, CreditosAcademicos, CreditosFinanceiros, CargaHoraria, DuracaoAula) " +
-                "VALUES ('" + model.Nome + "', '" + model.NomeCompleto + "','" + model.NivelEnsino + "'," + model.CreditosAcademicos + ", " + model.CreditosFinanceiros + ", " + model.CargaHoraria + ", " + model.DuracaoAula + ")";
+            comandoMySql.CommandText = "INSERT INTO disciplinas (Id, Nome, NomeCompleto, NivelEnsino, CreditosAcademicos, CreditosFinanceiros, CargaHoraria, DuracaoAula')" +
+                "VALUES ('" + model.Id + "','" + model.Nome + "', '" + model.NomeCompleto + "','" + model.NivelEnsino + "','" + model.CreditosAcademicos + "', '" + model.CreditosFinanceiros + "', '" + model.CargaHoraria + "', '" + model.DuracaoAula + "')";
 
             comandoMySql.ExecuteNonQuery();
             //encerra conexão com bd
@@ -35,7 +35,6 @@ namespace Data.Repository
         public List<Disciplina> ListarGrid()
         {
             List<Disciplina> disciplinas = new List<Disciplina>();
-            Disciplina disciplina = new Disciplina();
 
             MySqlConnectionStringBuilder conexaoDb = conexaoBanco.conexaoBanco();
             MySqlConnection realizaConexacoDb = new MySqlConnection(conexaoDb.ToString());
@@ -44,12 +43,13 @@ namespace Data.Repository
 
             MySqlCommand comandoMySql = realizaConexacoDb.CreateCommand();
             //comando sql select
-            comandoMySql.CommandText = "SELECT * FROM disciplina";
+            comandoMySql.CommandText = "SELECT * FROM disciplinas";
             MySqlDataReader reader = comandoMySql.ExecuteReader();
             
             //Whille para armazenar todas as disciplinas na lista disciplinas
             while (reader.Read())
             {
+                Disciplina disciplina = new Disciplina();
                 disciplina.Id = reader.GetInt32(0);
                 disciplina.Nome = reader.GetString(1);
                 disciplina.NomeCompleto = reader.GetString(2);
@@ -76,7 +76,7 @@ namespace Data.Repository
 
             MySqlCommand comandoMySql = realizaConexacoDb.CreateCommand();
             //comando sql update
-            comandoMySql.CommandText = "UPDATE disciplina SET nome= '" + model.Nome + "', " + "NomeCompleto = '" + model.NomeCompleto + "', " + "NivelEnsino = '" + model.NivelEnsino + "', " + "CreditosAcademicos = '" + model.CreditosAcademicos + "', " + "CreditosFinanceiros = '" + model.CreditosFinanceiros + "', " + "CargaHoraria = '" + model.CargaHoraria + "', " + "DuracaoAula = '" + model.DuracaoAula + "' " + " WHERE id = " + model.Id + "";
+            comandoMySql.CommandText = "UPDATE disciplinas SET nome= '" + model.Nome + "', " + "NomeCompleto = '" + model.NomeCompleto + "', " + "NivelEnsino = '" + model.NivelEnsino + "', " + "CreditosAcademicos = '" + model.CreditosAcademicos + "', " + "CreditosFinanceiros = '" + model.CreditosFinanceiros + "', " + "CargaHoraria = '" + model.CargaHoraria + "', " + "DuracaoAula = '" + model.DuracaoAula + "' " + " WHERE id = " + model.Id + "";
             comandoMySql.ExecuteNonQuery();
             //encerra conexão com bd
             realizaConexacoDb.Close();
@@ -92,7 +92,7 @@ namespace Data.Repository
 
             MySqlCommand comandoMySql = realizaConexacoDb.CreateCommand();
             //comando sql delete
-            comandoMySql.CommandText = "DELETE FROM disciplina WHERE id = " + id + "";
+            comandoMySql.CommandText = "DELETE FROM disciplinas WHERE Id = " + id + "";
             comandoMySql.ExecuteNonQuery();
             //encerra conexão com bd
             realizaConexacoDb.Close();
