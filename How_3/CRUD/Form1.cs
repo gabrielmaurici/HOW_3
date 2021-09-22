@@ -78,7 +78,7 @@ namespace CRUD
             }
             catch
             {
-                Console.WriteLine("Não conseguimos efetuar a conexão com o Banco de Dados... Por favor tente mais tarde!");
+                MessageBox.Show("Não conseguimos efetuar a conexão com o Banco de Dados... Por favor tente mais tarde!");
             }
         }
         // função edita um insert
@@ -126,7 +126,7 @@ namespace CRUD
             }
             catch
             {
-                Console.WriteLine("Não foi possível se conectar com o Banco de Dados... Por favor tente deletar sua disciplina mais tarde!");
+                MessageBox.Show("Não foi possível se conectar com o Banco de Dados... Por favor tente deletar sua disciplina mais tarde!");
             }
         }
         // limpeza de campos
