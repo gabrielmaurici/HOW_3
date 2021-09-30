@@ -22,9 +22,7 @@ namespace Data.Repository
             realizaConexacoDb.Open();
 
             MySqlCommand comandoMySql = realizaConexacoDb.CreateCommand();
-            //comando sql insert
-            comandoMySql.CommandText = "INSERT INTO disciplinas (Id, Nome, NomeCompleto, NivelEnsino, CreditosAcademicos, CreditosFinanceiros, CargaHoraria, DuracaoAula')" +
-                "VALUES ('" + model.Id + "','" + model.Nome + "', '" + model.NomeCompleto + "','" + model.NivelEnsino + "','" + model.CreditosAcademicos + "', '" + model.CreditosFinanceiros + "', '" + model.CargaHoraria + "', '" + model.DuracaoAula + "')";
+            comandoMySql.CommandText = "INSERT INTO disciplinas(Id, Nome, NomeCompleto, NivelEnsino, CreditosAcademicos, CreditosFinanceiros, CargaHoraria, DuracaoAula) VALUES ('" + model.Id + "','" + model.Nome + "','" + model.NomeCompleto + "','" + model.NivelEnsino + "','" + model.CreditosAcademicos + "','" + model.CreditosFinanceiros + "','" + model.CargaHoraria + "','" + model.DuracaoAula + "')";
 
             comandoMySql.ExecuteNonQuery();
             //encerra conexão com bd

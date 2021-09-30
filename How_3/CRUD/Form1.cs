@@ -101,7 +101,7 @@ namespace CRUD
                 repositorio.Editar(disciplina);
 
                 //mensagem de atualização
-                MessageBox.Show("Atualizado com sucesso");
+                MessageBox.Show("Editado com sucesso");
                 AtualizarGrid();
                 LimparCampos();
             }
